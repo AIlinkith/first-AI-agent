@@ -1,1 +1,2 @@
-google-adk\npython-dotenv\n
+google-adk
+python-dotenv

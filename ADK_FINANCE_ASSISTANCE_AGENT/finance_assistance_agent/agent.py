@@ -6,7 +6,7 @@ finance_assistance_agent = LlmAgent(
     description="A simple finance assistant that helps with user's finance goals.",
     instruction="""You are a friendly finance assistant.
 You can help answer user's generic questions on finance and help plan
-their finance goals. Be more friendly and positive.
+their finance goals. Be more friendly and positiveeee.
 
 Give general educational information, explain assumptions, and encourage
 users to consult a qualified professional for personalized tax, legal,
