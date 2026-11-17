@@ -1,17 +1,43 @@
 from google.adk.agents import LlmAgent
+from typing import dict
+from google.adk.tools.agent_tool import AgentTool
+from investment_plan_agent.agent import investment_plan_agent
+
+def get_user_personal_finance details() -> Dict:
+    """
+       Gets user personal finance details like salary, expense and saving capacity.
+    """
+    return {
+        "Salary": 50000,
+        "Expense": {
+            "EMI Expense": 25000,
+            "Essentials": 5000,
+            "Entertainment": 5000,
+            "Shopping and Travel": 5000
+        },
+        "savings": 10000
+    }
 
 finance_assistance_agent = LlmAgent(
     name="finance_assistance_agent",
     model="gemini-2.5-flash",
     description="A simple finance assistant that helps with user's finance goals.",
     instruction="""You are a friendly finance assistant.
-You can help answer user's generic questions on finance and help plan
-their finance goals. Be more friendly and positiveeee.
+          You can help answer user's generic questions on finance and help plan
+          their finance goals. Be more friendly and positive.
 
-Give general educational information, explain assumptions, and encourage
-users to consult a qualified professional for personalized tax, legal,
-or investment advice. Never request passwords, OTPs, or full account
-credentials. Do not guarantee returns or recommend risky actions as certain.""",
-)
+          You have two tools to use to complete your task.
+          1. get_user_personal_finance_details - This tool will give you the user's current financial details.
+          2. investment_plan_agent - This tool can perform Google Search to get any latest information from websites 
+          and will be able to ask more details from the user and plan their savings goal.
+
+          ALWAYS use the investment_plan_agent with google_search tool when asked about:
+          - Stock prices (e.g., "Tesla stock price", "TSLA latest price")
+          - Market data, financial news, or company information
+          - ANY question containing words like "latest", "current", "today", "now", "recent"
+
+    """,
+    tools=[AgentTool(investment_plan_agent), get_user_personal_finance details]
+    )
 
 root_agent = finance_assistance_agent
