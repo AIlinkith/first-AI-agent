@@ -1,9 +1,9 @@
 from google.adk.agents import LlmAgent
-from typing import dict
+from typing import Dict
 from google.adk.tools.agent_tool import AgentTool
 from investment_plan_agent.agent import investment_plan_agent
 
-def get_user_personal_finance details() -> Dict:
+def get_user_personal_finance_details() -> Dict:
     """
        Gets user personal finance details like salary, expense and saving capacity.
     """
